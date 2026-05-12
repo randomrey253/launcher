@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <div id="content">Loading from jsDelivr...</div>
+    <script>
+        // Fetch the TXT file content from jsDelivr
+        fetch('https://cdn.jsdelivr.net/gh/randomrey253/launcher@main/html')
+            .then(response => response.text())
+            .then(html => {
+                // This command "runs" the HTML text in your browser
+                document.body.innerHTML = html;
+            })
+            .catch(err => console.error('Failed to load:', err));
+    </script>
+</body>
+</html>
