@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>File Runner</title>
+</head>
+<body>
+    <!-- 1. Input to select the file -->
+    <input type="file" id="fileInput" accept=".html,.txt">
+    <button onclick="runFile()">Run File in New Tab</button>
+
+    <script>
+        function runFile() {
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert("Please select a file first.");
+                return;
+            }
+
+            // 2. Use FileReader to read the file content as text
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const content = e.target.result;
+                
+                // 
+                const newWindow = window.open('about:blank', '_blank');
+                
+                if (newWindow) {
+                    // 
+                    newWindow.document.open();
+                    newWindow.document.write(content);
+                    newWindow.document.close();
+                } else {
+                    alert("Pop-up blocked! Please allow pop-ups for this site.");
+                }
+            };
+            reader.readAsText(file);
+        }
+    </script>
+</body>
+</html>
+
+
