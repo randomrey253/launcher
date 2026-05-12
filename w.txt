@@ -1,0 +1,31 @@
+FILE RUNNER LOGIC (RAW TEXT)
+
+HTML Elements:
+- File Input (ID: fileInput, Accepts: .html, .txt)
+- Button (Label: Run File in New Tab, Action: runFile())
+
+JavaScript Source:
+function runFile() {
+    const fileInput = document.getElementById('fileInput');
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        alert("Please select a file first.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const content = e.target.result;
+        const newWindow = window.open('about:blank', '_blank');
+        
+        if (newWindow) {
+            newWindow.document.open();
+            newWindow.document.write(content);
+            newWindow.document.close();
+        } else {
+            alert("Pop-up blocked! Please allow pop-ups for this site.");
+        }
+    };
+    reader.readAsText(file);
+}
